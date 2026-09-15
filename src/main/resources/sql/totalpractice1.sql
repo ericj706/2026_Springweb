@@ -1,4 +1,5 @@
-CREATE DATABASE IF NOT EXISTS totalpractice1
+CREATE DATABASE IF NOT EXISTS totalpractice1;
+USE totalpractice1;
 
 INSERT INTO category (cno, name) VALUES (1, '전자기기');
 INSERT INTO category (cno, name) VALUES (2, '생활가전');

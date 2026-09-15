@@ -4,7 +4,6 @@ package example.TotalPractice.model.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import example.practice5.model.entity.BoardEntity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -37,6 +36,5 @@ public class ProductEntity {
     @ToString .Exclude
     @Builder .Default
     private List<ReviewEntity> reviewEntities = new ArrayList<>();
-
-
+    
 }

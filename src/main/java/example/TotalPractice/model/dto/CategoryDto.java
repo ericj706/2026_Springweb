@@ -14,7 +14,7 @@ public class CategoryDto {
     private Integer cno;
     private String name;
 
-    @Builder .Default
+    @Builder.Default
     private List<ProductDto> productDtos = new ArrayList<>();
 
     // toEntity
@@ -29,4 +29,6 @@ public class CategoryDto {
                 .cno(categoryEntity.getCno())
                 .name(categoryEntity.getName())
                 .build();
-    }}
+    }
+    
+}
