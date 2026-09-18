@@ -17,4 +17,19 @@ public class ApiController {
     public Map<String,Object> parking(){
         return apiService.parking();
     }
+
+    @GetMapping( value = "/day08" ,  produces = "application/json")
+    public  Map<String,Object> get(){
+        return apiService.get();
+    }
+
+    @GetMapping ("/view")
+    public Map<String,Object> findAll(){
+        return apiService.findAll();
+    }
+
+    @GetMapping("/api/dust") 
+    public String getDustData(){
+        return apiService.getDustData();
+    }
 }
