@@ -67,17 +67,18 @@ public class ApiService {
     // 중소벤처기업 정보.csv
     // 프로젝트내 resources>static>파일명.csv
     public List<Map<String,Object>> test3(){
+        List<Map<String,Object>> list = new ArrayList<>();
         // 1. .csv파일 경로, resources 이하 폴더
-        String fileName = "./중소벤처기업부_벤처기업명단_20260521.csv";
+        String fileName = "static/중소벤처기업부_벤처기업명단_20260521.csv";
         // 2. ClassPathResource 객체 이용하여 해당 경로내 파일 가져오기 [파일객체]
         ClassPathResource resource = new ClassPathResource(fileName);
-        // 3. (대용량) 파일들을 바이트로 읽어와서 바이트 배열에 저장 .getInputStream().readAllBytes();
-        List<Map<String,Object>> list = new ArrayList<>();
+        
         try {
+            // 3. (대용량) 파일들을 바이트로 읽어와서 바이트 배열에 저장 .getInputStream().readAllBytes();
             byte[] bytes = resource.getInputStream().readAllBytes();
             // 4. 한글 인코딩, EUC-KR, CP949, UTF-8
             InputStreamReader reader = new InputStreamReader( new java.io.ByteArrayInputStream(bytes)
-            , Charset.forName("CP949"));
+            , Charset.forName("UTF-8"));
             // 5. OpenCSV
             CSVReader csvReader = new CSVReaderBuilder(reader).build();
             // 6. 주로 첫행은 제목(행) 가져오기 (key/속성명 사용할 예정)
