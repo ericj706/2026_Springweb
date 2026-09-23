@@ -1,0 +1,4 @@
+CREATE DATABASE db0923;
+
+USE db0923;
+

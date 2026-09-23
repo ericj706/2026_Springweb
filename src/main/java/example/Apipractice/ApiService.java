@@ -18,7 +18,7 @@ public class ApiService {
         String url = "https://api.odcloud.kr/api/15003953/v1/uddi:27347831-ca36-4887-b51d-d5e59f56bfea";
         url+="?page="+1;
         url+="&perPage=" +30;
-        url+="&serviceKey=3f12958d4a3d304a9e3f30fef163ec8020c6aec9c35ad05e206caa977355eaa2";
+        url+="&serviceKey=" + serviceKey;
 
         Map<String,Object> response = webClient.get()
         .uri(url).retrieve().bodyToMono(Map.class).block();
@@ -28,7 +28,7 @@ public class ApiService {
         String url = "https://api.odcloud.kr/api/15062631/v1/uddi:5134c40d-4de8-49ec-ad70-de75d6675ac7";
         url += "?page="+1;
         url += "&perPage="+10;
-        url += "&serviceKey="+serviceKey;
+        url += "&serviceKey=3f12958d4a3d304a9e3f30fef163ec8020c6aec9c35ad05e206caa977355eaa2";
 
         Map<String, Object> response = webClient.get()
                                         .uri(url)
