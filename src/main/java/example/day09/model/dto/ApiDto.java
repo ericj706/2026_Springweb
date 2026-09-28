@@ -1,5 +1,7 @@
 package example.day09.model.dto;
 
+import java.time.LocalDateTime;
+
 import example.day09.model.entity.ApiEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,24 +15,25 @@ public class ApiDto {
     private String subject;
     private String name;
     private String regdate;
-    private String contents;
+    private String content;
 
-    public ApiEntity toEntity(ApiDto apiDto){
+    public ApiEntity toEntity(){
         return ApiEntity.builder()
                 .idx(this.idx)
                 .subject(this.subject)
                 .name(this.name)
-                .regdate(this.regdate)
-                .contents(this.contents)
+                .regdate(LocalDateTime.now().toString())
+                .content(this.content)
                 .build();
     }
 
     public static ApiDto from(ApiEntity apiEntity){
         return ApiDto.builder()
+                .idx(apiEntity.getIdx())
                 .subject(apiEntity.getSubject())
                 .name(apiEntity.getName())
                 .regdate(apiEntity.getRegdate())
-                .contents(apiEntity.getContents())
+                .content(apiEntity.getContent())
                 .build();
     }
 

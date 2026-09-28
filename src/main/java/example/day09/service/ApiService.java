@@ -21,4 +21,13 @@ public class ApiService {
         }).toList();
         return apiDtos;
     }
+
+    public boolean save(ApiDto apiDto){
+        ApiEntity apiEntity = apiDto.toEntity();
+        ApiEntity saved = apiRepository.save(apiEntity);
+        if(saved.getIdx() >=1 ){
+            return true;
+        }
+        return false;
+    }
 }

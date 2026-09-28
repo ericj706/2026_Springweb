@@ -21,6 +21,6 @@ public class ApiEntity {
     private String subject;
     private String name;
     private String regdate;
-    private String contents;
+    private String content;
 
 }

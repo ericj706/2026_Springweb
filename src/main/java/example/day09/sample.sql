@@ -1,4 +1,3 @@
+drop DATABASE if EXISTS db0923;
 CREATE DATABASE db0923;
-
-USE db0923;
-
+use db0923;
