@@ -1,6 +1,5 @@
 package example.day11;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
