@@ -1,4 +1,4 @@
-package example.day10;
+package example.day11;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
