@@ -94,6 +94,41 @@ public class MemberController {
         response.addHeader(HttpHeaders.SET_COOKIE, cookie2.toString());
         return true;
     }
+    // access토큰 만료될때 Refresh 검증 후 토큰 재발급 
+    @PostMapping ("/reissue")
+    public MemberDto reissue(
+        @CookieValue (value = "refreshToken", required = false) String refreshToken,
+        HttpServletResponse response){
+        // 1. refresh토큰 가져온다.
+        if (refreshToken == null)return null;
+        // 2. refresh 토큰내 검증하여 회원번호 조회
+        Long mno = jwtUtil.getMnoFromToken(refreshToken);
+        // 3. 레디스에 저장된 refresh 토큰 꺼내기
+        String savedRefreshToken = redisTokenService.getRefreshToken(mno);
+        // 4. 만약에 레디스에 없거나 전달받은 토큰과 다르면 문제발생
+        if (savedRefreshToken == null || !refreshToken.equals(savedRefreshToken)) {
+            // null이거나 다르면 자동 로그아웃
+            redisTokenService.deleteRefrshToken(mno);
+        }
+        // 5. 같다면 새로운 accessToken과 refreshToken 재발급
+        String newAccessToken = jwtUtil.createAccessToken( mno );
+        String newRefreshToken = jwtUtil.createRefreshToken( mno );
+        // 6. 레디스에 refresh 토큰 저장
+        redisTokenService.setRefreshToken(mno, refreshToken);
+        // 7. 쿠키 설정
+        ResponseCookie cookie1 = ResponseCookie.from("accessToken" , newAccessToken)
+                                .path("/").maxAge(Duration.ofMinutes(1) ) // 30분
+                                .httpOnly(true).secure(false).sameSite("Lax").build();
+        ResponseCookie cookie2 = ResponseCookie.from("refreshToken" , newRefreshToken)
+                                .path("/").maxAge(Duration.ofDays(7) ) // 7일 
+                                .httpOnly(true).secure(false).sameSite("Lax").build();
+
+        // 8. header 쿠키 포함 : 2개 이상 쿠키 포함한경우 .addHeader()사용, setHeader()사용X
+        response.addHeader( HttpHeaders.SET_COOKIE  , cookie1.toString() );
+        response.addHeader( HttpHeaders.SET_COOKIE  , cookie2.toString() );
+        return memberService.getMyInfo(mno);
+    }
+
 }
     
 

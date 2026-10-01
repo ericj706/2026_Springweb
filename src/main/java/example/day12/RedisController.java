@@ -105,7 +105,6 @@ public class RedisController {
         String value = objectMapper.writeValueAsString(memberDto);
         stringRedisTemplate.opsForValue().set(updateKey, value);
         return true;
-
     }
-
+    
 }
