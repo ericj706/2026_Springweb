@@ -35,7 +35,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
                 .setAllowedOriginPatterns("*"); // 모든 도메인 허용
 
     }
-
+    
 }
 
 /* 
